@@ -1,0 +1,515 @@
+:root {
+  --green: #2e7d32;
+  --light-green: #66bb6a;
+  --soil: #6d4c41;
+  --sky: #42a5f5;
+  --text: #17301e;
+  --card: rgba(255, 255, 255, 0.55);
+  --border: rgba(255, 255, 255, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--text);
+  background: linear-gradient(130deg, #d8f3dc 0%, #d7ecff 44%, #f8e1d3 100%);
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(1120px, 92%);
+  margin: 0 auto;
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+.main-content {
+  padding: 7.2rem 0 3rem;
+}
+
+.navbar-wrap {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 20;
+  backdrop-filter: blur(8px);
+  background: rgba(234, 250, 238, 0.68);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.navbar {
+  min-height: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+}
+
+.nav-links a.active {
+  background: var(--green);
+  color: #fff;
+}
+
+.page-stack {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.glass-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 1.25rem;
+  box-shadow: 0 20px 45px rgba(31, 68, 30, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 0 0 0.7rem;
+}
+
+.hero p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(130deg, var(--green), var(--light-green));
+  color: #fff;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--soil);
+}
+
+.hero-visual {
+  min-height: 260px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #84c6ff 0%, #deefff 42%, #8bcf7d 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.sun {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: radial-gradient(circle, #ffd54f, #ffb300);
+  animation: floatSun 5s ease-in-out infinite;
+}
+
+.field {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  height: 85px;
+  border-radius: 50% 50% 0 0;
+}
+
+.field-1 {
+  bottom: 45px;
+  background: #7bc96b;
+}
+
+.field-2 {
+  bottom: -5px;
+  background: #4f9b53;
+}
+
+.plant {
+  width: 12px;
+  height: 105px;
+  position: absolute;
+  left: 45%;
+  bottom: 52px;
+  background: #2e7d32;
+  border-radius: 999px;
+  animation: growPlant 3s ease-in-out infinite;
+}
+
+.plant::before,
+.plant::after {
+  content: "";
+  position: absolute;
+  width: 34px;
+  height: 16px;
+  background: #66bb6a;
+  border-radius: 999px;
+}
+
+.plant::before {
+  left: -30px;
+  top: 24px;
+  transform: rotate(-25deg);
+}
+
+.plant::after {
+  right: -30px;
+  top: 45px;
+  transform: rotate(24deg);
+}
+
+.feature-grid,
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.feature-card,
+.about-card {
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+.feature-card:hover {
+  box-shadow: 0 16px 32px rgba(38, 106, 52, 0.15);
+}
+
+.icon-wrap {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  border-radius: 12px;
+}
+
+.tab-row {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.weather-tools {
+  margin-top: 1rem;
+  padding: 0.9rem;
+  border: 1px solid rgba(46, 125, 50, 0.22);
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+}
+
+.weather-tools h3 {
+  margin: 0;
+}
+
+.weather-tools p {
+  margin: 0.45rem 0 0;
+}
+
+.weather-actions {
+  margin-top: 0.65rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+  align-items: end;
+}
+
+.weather-actions label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+}
+
+.weather-actions input {
+  width: 100%;
+  border: 1px solid #c9dcca;
+  border-radius: 8px;
+  padding: 0.52rem 0.6rem;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.tab-btn {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #d5ebdd;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: var(--green);
+  color: #fff;
+}
+
+.input-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.input-grid.compact {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.input-grid label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+}
+
+.input-grid input {
+  width: 100%;
+  border: 1px solid #c9dcca;
+  border-radius: 8px;
+  padding: 0.52rem 0.6rem;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.result-card {
+  margin-top: 1.1rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+.chip-row {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.chip {
+  background: rgba(46, 125, 50, 0.12);
+  border: 1px solid rgba(46, 125, 50, 0.25);
+  padding: 0.35rem 0.55rem;
+  border-radius: 999px;
+}
+
+.chart-box {
+  margin-top: 0.7rem;
+  width: 100%;
+  height: 260px;
+}
+
+.risk-meter {
+  margin-top: 0.7rem;
+  width: 100%;
+  height: 14px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.risk-fill {
+  height: 100%;
+  transition: width 0.7s ease;
+}
+
+.loader-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 0.5rem 0.8rem;
+  border-radius: 999px;
+}
+
+.loader {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid rgba(46, 125, 50, 0.2);
+  border-top-color: var(--green);
+  animation: spin 0.8s linear infinite;
+}
+
+.error-box {
+  background: rgba(229, 57, 53, 0.11);
+  border: 1px solid rgba(229, 57, 53, 0.35);
+  color: #b71c1c;
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+}
+
+.info-box {
+  background: rgba(46, 125, 50, 0.09);
+  border: 1px solid rgba(46, 125, 50, 0.24);
+  color: #245a27;
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+}
+
+.muted {
+  opacity: 0.74;
+}
+
+.bg-orb,
+.bg-cloud {
+  position: absolute;
+  z-index: -1;
+}
+
+.bg-orb {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  filter: blur(50px);
+}
+
+.orb-a {
+  background: rgba(102, 187, 106, 0.35);
+  top: 16%;
+  left: -90px;
+}
+
+.orb-b {
+  background: rgba(66, 165, 245, 0.3);
+  right: -80px;
+  bottom: 10%;
+}
+
+.bg-cloud {
+  width: 190px;
+  height: 70px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  filter: blur(2px);
+  animation: driftCloud 17s linear infinite;
+}
+
+.cloud-1 {
+  top: 110px;
+  left: -240px;
+}
+
+.cloud-2 {
+  top: 220px;
+  left: -290px;
+  animation-delay: 6s;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes growPlant {
+  0%,
+  100% {
+    transform: scaleY(0.9);
+  }
+  50% {
+    transform: scaleY(1.05);
+  }
+}
+
+@keyframes floatSun {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@keyframes driftCloud {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100vw + 380px));
+  }
+}
+
+@media (max-width: 980px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-grid,
+  .about-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .input-grid.compact {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .weather-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .feature-grid,
+  .about-grid,
+  .input-grid,
+  .input-grid.compact {
+    grid-template-columns: 1fr;
+  }
+
+  .weather-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .main-content {
+    padding-top: 6.4rem;
+  }
+
+  .nav-links {
+    font-size: 0.92rem;
+  }
+}
