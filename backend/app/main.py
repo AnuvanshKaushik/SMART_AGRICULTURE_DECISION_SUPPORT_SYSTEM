@@ -156,11 +156,11 @@ def current_weather(
             "forecast_days": 1,
         }
 
-        with httpx.Client(timeout=15.0) as client:
+        with httpx.Client(timeout=20.0) as client:
             resp = client.get(url, params=params)
             resp.raise_for_status()
             raw = resp.json()
-        logger.info("Raw weather API response: %s", json.dumps(raw))
+        logger.info("Weather API response received successfully from coordinates: %.4f, %.4f", lat, lon)
 
         current = raw.get("current", {})
         current_units = raw.get("current_units", {})
@@ -247,7 +247,11 @@ def current_weather(
                 "wind_direction": "degrees",
             },
         }
+    except httpx.TimeoutException as exc:
+        logger.error("Weather API timeout after 20s for coordinates: %.4f, %.4f", lat, lon)
+        raise HTTPException(status_code=408, detail="Weather service timeout. Please try again.") from exc
     except Exception as exc:
+        logger.error("Weather fetch error: %s", str(exc))
         raise HTTPException(status_code=400, detail=f"Weather fetch failed: {exc}") from exc
 
 

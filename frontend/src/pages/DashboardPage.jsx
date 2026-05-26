@@ -308,10 +308,20 @@ export default function DashboardPage() {
         const res = await getCurrentWeather(latitude, longitude);
         payload = res.data;
       } catch (err) {
-        backendFailure =
-          err?.response?.data?.detail ||
-          err?.message ||
-          "Weather service is unavailable.";
+        // Determine error type
+        let errorMsg = "Weather service is unavailable.";
+        if (err.code === "ECONNABORTED") {
+          errorMsg = "Weather service timeout. Using cached forecast data.";
+        } else if (err?.response?.status === 408) {
+          errorMsg = "Weather service timeout (408). Using cached forecast data.";
+        } else if (err?.response?.data?.detail) {
+          errorMsg = err.response.data.detail;
+        } else if (err?.message) {
+          errorMsg = err.message;
+        }
+        
+        backendFailure = errorMsg;
+        console.warn("Backend weather fetch failed:", errorMsg);
         payload = await fetchWeatherFromOpenMeteo(latitude, longitude);
       }
 
@@ -321,11 +331,12 @@ export default function DashboardPage() {
         setWeatherNotice(`Backend weather service was unavailable, so direct forecast data was used. ${backendFailure}`);
       }
     } catch (err) {
-      setWeatherError(
+      const errorMsg =
         err?.response?.data?.detail ||
           err?.message ||
-          "Could not fetch live weather."
-      );
+          "Could not fetch live weather.";
+      setWeatherError(errorMsg);
+      console.error("Weather fetch error:", err);
     } finally {
       setWeatherLoading(false);
     }
